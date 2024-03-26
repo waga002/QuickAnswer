@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--    导入jdbc配置资源-->
+    <properties resource="jdbc.properties"/>
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!-- 开启log4j来记录日志 -->
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+    <environments default="test">
+        <environment id="test">
+            <!--使用jdbc管理事务  , MANAGER 是使用mybatis管理事务-->
+            <transactionManager type="JDBC"></transactionManager>
+            <!--开启连接池, UNPOOLED 不开启-->
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!--加载映射文件, 加载mapper文件夹下所有-->
+    <mappers>
+        <mapper resource="mybatis/mapper/LoginUserInfoMapper.xml"></mapper>
+    </mappers>
+</configuration>
